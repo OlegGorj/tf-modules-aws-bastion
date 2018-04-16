@@ -1,3 +1,7 @@
+[![GitHub release](https://img.shields.io/github/release/OlegGorj/tf-modules-aws-bastion.svg)](https://github.com/OlegGorj/tf-modules-aws-bastion/releases)
+[![GitHub issues](https://img.shields.io/github/issues/OlegGorj/tf-modules-aws-bastion.svg)](https://github.com/OlegGorj/tf-modules-aws-bastion/issues)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c85a578cb0c4c85bddb373a6f3686ce)](https://app.codacy.com/app/oleggorj/tf-modules-aws-bastion?utm_source=github.com&utm_medium=referral&utm_content=OlegGorj/tf-modules-aws-bastion&utm_campaign=badger)
+
 # Terraform Module: AWS Bastion
 
 Templated Terraform module to implement Bastion node
