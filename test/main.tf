@@ -20,6 +20,16 @@ variable "ip_allow5" {}
 ###############################################################################
 # RESOURCES
 ###############################################################################
+terraform {
+  backend "s3" {
+    bucket  = "aws-terraform-state-bucket"
+    key     = "bastionbox.tfstate"
+    region  = "${var.region}"
+    profile = "${var.env}"
+    encrypt = true
+    acl     = "private"
+  }
+}
 
 provider "aws" {
   region                   = "${var.region}"
@@ -28,16 +38,6 @@ provider "aws" {
   profile                  = "${var.env}"
 }
 
-terraform {
-  backend "s3" {
-    bucket = "aws-terraform-state-bucket"
-    key = "vpc-with-bastionbox.tfstate"
-    region = "us-west-1"
-    profile = "dev"
-    encrypt = true
-    acl     = "private"
-  }
-}
 
 resource "aws_key_pair" "key" {
   key_name   = "${var.environment}"
@@ -46,7 +46,7 @@ resource "aws_key_pair" "key" {
 
 # call bastion module
 module "bastion" {
-  source           = "modules/bastion"
+  source           = "git::https://github.com/oleggorj/tf-aws-bastion.git?ref=dev-branch"
   env              = "${var.env}"
   region           = "${var.region}"
   instance_type    = "${var.ec2_bastion_instance_type}"

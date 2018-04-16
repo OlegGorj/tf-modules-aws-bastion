@@ -180,7 +180,7 @@ resource "aws_eip" "bastion" {
 }
 
 resource "aws_instance" "bastion" {
-  ami                    = "${data.aws_ami.bastion.id}"
+  ami                    = "${data.aws_ami.ubuntu.id}"
   instance_type          = "${var.instance_type}"
   key_name               = "${var.bastion_key_name}"
   subnet_id              = "${element(split(",", var.subnet_ids), count.index)}"
@@ -209,15 +209,15 @@ output "private_ip" {
 }
 
 output "ami_image_id" {
-  value = "${data.aws_ami.bastion.image_id}"
+  value = "${data.aws_ami.ubuntu.image_id}"
 }
 
 output "ami_creation_date" {
-  value = "${data.aws_ami.bastion.creation_date}"
+  value = "${data.aws_ami.ubuntu.creation_date}"
 }
 
 output "ami_name" {
-  value = "${data.aws_ami.bastion.name}"
+  value = "${data.aws_ami.ubuntu.name}"
 }
 
 #
