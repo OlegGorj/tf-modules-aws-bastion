@@ -7,7 +7,10 @@ variable "bastion_key_name" {}
 variable "bastion_key_path" {}
 variable "vpc_id" {}
 variable "vpc_cidr" {}
-variable "subnet_ids" {}
+variable "subnet_ids" {
+  type = "list"
+  default = []
+}
 variable "shell_username" {}
 variable "region" {}
 variable "state_bucket" {}
