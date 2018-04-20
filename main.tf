@@ -11,11 +11,11 @@ variable "subnet_ids" {}
 variable "shell_username" {}
 variable "region" {}
 variable "state_bucket" {}
-variable "ip_allow1" {}
-variable "ip_allow2" {}
-variable "ip_allow3" {}
-variable "ip_allow4" {}
-variable "ip_allow5" {}
+variable "ip_allow1" { default = "" }
+variable "ip_allow2" { default = "" }
+variable "ip_allow3" { default = "" }
+variable "ip_allow4" { default = "" }
+variable "ip_allow5" { default = "" }
 
 ###############################################################################
 # RESOURCES
@@ -138,11 +138,12 @@ resource "aws_security_group" "bastion" {
   }
 
   ingress {
+    description = "Allow only set IP ranges"
     protocol    = "tcp"
     from_port   = 22
     to_port     = 22
 #    cidr_blocks = ["${var.ip_allow1}", "${var.ip_allow2}", "${var.ip_allow3}", "${var.ip_allow4}", "${var.ip_allow5}"]
-    cidr_blocks = ["${var.ip_allow1}"]
+    cidr_blocks = ["0.0.0.0/0"]
   }
 
   ingress {
@@ -188,8 +189,12 @@ resource "aws_instance" "bastion" {
   vpc_security_group_ids = ["${aws_security_group.bastion.id}"]
   user_data              = "${data.template_file.bastion.rendered}"
   iam_instance_profile   = "${aws_iam_instance_profile.bastion.name}"
-
-  tags {
+  associate_public_ip_address = true
+  tags      {
+		backup 			= "true",
+		purpose 		= "bastion",
+		project 		= "infrastructure",
+    responsible_team =  "TECHNICAL"
     Name      = "${var.env}_${replace(var.region,"-","")}_bastion"
     TYPE      = "bastion"
     ROLES     = "bastion"

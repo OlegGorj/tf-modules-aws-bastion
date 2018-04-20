@@ -20,6 +20,13 @@ variable "cred-file" {
   default = "~/.aws/credentials"
 }
 
+variable "namespace" {
+  default = "awscloud.io"
+}
+variable "name" {
+  default = "testcluster"
+}
+
 ###############################################################################
 # RESOURCES
 ###############################################################################
@@ -123,17 +130,10 @@ module "bastion" {
   instance_type    = "${var.ec2_bastion_instance_type}"
   bastion_key_name = "${var.key_name}"
   bastion_key_path = "${var.key_path}"
-  vpc_id           = "${data.terraform_remote_state.vpc.vpc_id}"
-  vpc_cidr         = "${data.terraform_remote_state.vpc.vpc_cidr}"
-
+  vpc_id           = "${module.vpc.vpc_id}"
+  vpc_cidr         = "${module.vpc.vpc_cidr_block}"
   subnet_ids       = "${module.public_subnets.subnet_ids}"
-
   shell_username   = "${var.ec2_bastion_user}"
-  ip_allow1        = "${var.ip_allow1}"
-  ip_allow2        = "${var.ip_allow2}"
-  ip_allow3        = "${var.ip_allow3}"
-  ip_allow4        = "${var.ip_allow4}"
-  ip_allow5        = "${var.ip_allow5}"
   state_bucket     = "${var.state_bucket}"
 }
 
