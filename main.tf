@@ -141,7 +141,8 @@ resource "aws_security_group" "bastion" {
     protocol    = "tcp"
     from_port   = 22
     to_port     = 22
-    cidr_blocks = ["${var.ip_allow1}", "${var.ip_allow2}", "${var.ip_allow3}", "${var.ip_allow4}", "${var.ip_allow5}"]
+#    cidr_blocks = ["${var.ip_allow1}", "${var.ip_allow2}", "${var.ip_allow3}", "${var.ip_allow4}", "${var.ip_allow5}"]
+    cidr_blocks = ["${var.ip_allow1}"]
   }
 
   ingress {
