@@ -52,5 +52,18 @@ export AWS_KMS_ARN="arn:aws:kms:us-east-1:4545454545:key/xxxxxxxxxx-xxxx-xxxx-xx
 export TF_VAR_kms_key_id=${AWS_KMS_ARN}
 ```
 
+```bash
+terraform init  \
+    -backend-config="bucket=ca-central-1.aws-terraform-state-bucket" \
+    -backend-config="key=terraform/bastionbox.tfstate" \
+    -backend-config="region=ca-central-1" \
+    -backend-config="profile=dev"  \
+    -var-file=../environments/dev/dev.tfvars
+
+```
+
+
+
+
 
 ---
