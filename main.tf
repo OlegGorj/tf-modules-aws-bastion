@@ -179,6 +179,17 @@ data "template_file" "bastion" {
 resource "aws_eip" "bastion" {
   vpc      = true
   instance = "${aws_instance.bastion.id}"
+  tags      {
+		backup 			= "false",
+		purpose 		= "bastion",
+		project 		= "infrastructure",
+    responsible_team =  "TECHNICAL"
+    Name      = "${var.env}_${replace(var.region,"-","_")}_bastion_eip"
+    TYPE      = "eip"
+    ROLES     = "bastion"
+    ENV       = "${var.env}"
+    TERRAFORM = "true"
+  }
 }
 
 resource "aws_instance" "bastion" {
@@ -195,7 +206,7 @@ resource "aws_instance" "bastion" {
 		purpose 		= "bastion",
 		project 		= "infrastructure",
     responsible_team =  "TECHNICAL"
-    Name      = "${var.env}_${replace(var.region,"-","")}_bastion"
+    Name      = "${var.env}_${replace(var.region,"-","_")}_bastion"
     TYPE      = "bastion"
     ROLES     = "bastion"
     ENV       = "${var.env}"
