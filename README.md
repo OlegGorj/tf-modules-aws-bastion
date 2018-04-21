@@ -10,6 +10,8 @@ Templated Terraform module to implement Bastion node
 
 Builds the following infrastructure
 
+- VPC
+- Public subnet and 2 private subnets
 - EC2 instance
 - Route53 entries
 - EIP because the bastion isn't in an ASG
@@ -38,7 +40,9 @@ Prerequisites:
 - existing CMK in AWS KMS
 - generated keys pair
 
-How to use Bastion module:
+## How to use Bastion module:
+
+Example of `../environments/dev/dev.tfvars` file:
 
 ```bash
 export ENVIRONMENT="dev"
@@ -52,7 +56,13 @@ export AWS_KMS_ARN="arn:aws:kms:us-east-1:4545454545:key/xxxxxxxxxx-xxxx-xxxx-xx
 export TF_VAR_kms_key_id=${AWS_KMS_ARN}
 ```
 
+Init terraform:
+
 ```bash
+
+# example of usage is located under ./test directory
+cd test
+
 terraform init  \
     -backend-config="bucket=ca-central-1.aws-terraform-state-bucket" \
     -backend-config="key=terraform/bastionbox.tfstate" \
@@ -62,6 +72,17 @@ terraform init  \
 
 ```
 
+Plan terraform:
+
+```bash
+terraform plan -var-file=../environments/dev/dev.tfvars -out=./terraform
+```
+
+Apply terraform:
+
+```bash
+terraform apply -var-file=../environments/dev/dev.tfvars
+```
 
 
 
