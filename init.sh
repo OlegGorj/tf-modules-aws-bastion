@@ -61,6 +61,7 @@ command cp /root/.ssh/known_hosts /home/${TERRAFORM_user}/.ssh/known_hosts
 chown ${TERRAFORM_user}:${TERRAFORM_user} /home/${TERRAFORM_user}/.ssh/known_hosts
 
 # Let's say you wanted to allow Ansible to SSH in from Jenkins
+# hence, all you need to do is add Jenkins key to .ssh/authorized_keys
 ##############################################################
 # mkdir -p /home/${TERRAFORM_user}/.ssh
 # chmod 0700 /home/${TERRAFORM_user}/.ssh
