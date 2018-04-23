@@ -4,8 +4,6 @@
 
 # Terraform Module: AWS Bastion
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/0c85a578cb0c4c85bddb373a6f3686ce)](https://app.codacy.com/app/oleggorj/tf-modules-aws-bastion?utm_source=github.com&utm_medium=referral&utm_content=OlegGorj/tf-modules-aws-bastion&utm_campaign=badger)
-
 Templated Terraform module to implement Bastion node
 
 ## Overview
