@@ -54,8 +54,6 @@ export AWS_PROFILE="default"
 
 export AWS_STATE_BUCKET="tf-state-bucket"
 
-export AWS_KMS_ARN="arn:aws:kms:ca-central-1:4545454545:key/xxxxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxxxx"
-export TF_VAR_kms_key_id=${AWS_KMS_ARN}
 ```
 
 Init terraform:
